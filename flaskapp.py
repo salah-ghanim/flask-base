@@ -1,20 +1,24 @@
 import os
 from datetime import datetime
-from flask import Flask, request, flash, url_for, redirect, \
-     render_template, abort, send_from_directory
+from flask import Flask, request, flash, url_for, redirect, abort
 
 app = Flask(__name__)
 app.config.from_pyfile('flaskapp.cfg')
 
-@app.route('/')
+TWILIO_MESSAGE_TEMP =
+"""
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+<Message>{}</Message>
+</Response>
+"""
+
+@app.route("/", methods=['POST'])
 def index():
-    return render_template('index.html')
+    return TWILIO_MESSAGE_TEMP.format("hi")
 
-@app.route('/<path:resource>')
-def serveStaticResource(resource):
-    return send_from_directory('static/', resource)
 
-@app.route("/test")
+@app.route("/", methods=['GET'])
 def test():
     return "<strong>It's Alive!</strong>"
 
